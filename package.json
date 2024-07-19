@@ -2,10 +2,10 @@
   "name": "badr-be-assessment",
   "version": "1.0.0",
   "scripts": {
-    "dev:gateway": "cd gateway && npm run dev",
-    "dev:user": "cd user && npm run dev",
-    "dev:material": "cd material && npm run dev",
-    "dev:transaction": "cd transaction && npm run dev",
+    "dev:gateway": "cd services/gateway && npm run dev",
+    "dev:user": "cd services/user && npm run dev",
+    "dev:material": "cd services/material && npm run dev",
+    "dev:transaction": "cd services/transaction && npm run dev",
     "dev": "concurrently \"npm run dev:gateway\" \"npm run dev:user\" \"npm run dev:material\" \"npm run dev:transaction\""
   },
   "devDependencies": {
