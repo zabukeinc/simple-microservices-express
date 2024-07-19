@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@user-module/*": ["src/*"],
+      "@database/*": ["configs/database/*"],
+      "@kafka/*": ["configs/kafka/*"],
+      "@helper/*": ["configs/helpers/*"],
+      "@base/*": ["base/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
