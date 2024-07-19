@@ -15,6 +15,21 @@ const validateCreateUser = [
   },
 ];
 
+const validateUpdateUser = [
+  param("id").isUUID().withMessage("Invalid user ID"),
+  body("name").isString().withMessage("Name must be a string"),
+  body("type")
+    .isIn(["customer", "vendor"])
+    .withMessage("Invalid type value. Available type is customer and vendor."),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json(responseBadRequest(errors.array()));
+    }
+    next();
+  },
+];
+
 const validateGetUserById = [
   param("id").isUUID().withMessage("Invalid user ID"),
   (req, res, next) => {
@@ -42,4 +57,9 @@ const validateIndex = [
   },
 ];
 
-module.exports = { validateCreateUser, validateGetUserById, validateIndex };
+module.exports = {
+  validateCreateUser,
+  validateUpdateUser,
+  validateGetUserById,
+  validateIndex,
+};
