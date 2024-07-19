@@ -1,4 +1,7 @@
-const { responseNotFoundError, responseOK } = require('@helper/base.response.helper');
+const {
+  responseNotFoundError,
+  responseOK,
+} = require("@helper/base.response.helper");
 class BaseService {
   constructor(repository, kakfaProducer) {
     this.repository = repository;
@@ -8,9 +11,9 @@ class BaseService {
   async index(params) {
     try {
       const result = await this.repository.getMany(params);
-      return responseOK(result)
+      return responseOK(result);
     } catch (err) {
-      return Promise.reject(err)
+      return Promise.reject(err);
     }
   }
 
@@ -18,18 +21,18 @@ class BaseService {
     try {
       const result = await this.repository.create(data);
       await this.kafkaProducer.created(result);
-      return responseOK(result)
+      return responseOK(result);
     } catch (err) {
-      return Promise.reject(err)
+      return Promise.reject(err);
     }
   }
 
   async getOneById(id) {
     try {
-      const result = await this.repository.getOneById(id)
-      return responseOK(result)
+      const result = await this.repository.getOneById(id);
+      return responseOK(result);
     } catch (err) {
-      return Promise.reject(err)
+      return Promise.reject(err);
     }
   }
 
@@ -37,13 +40,13 @@ class BaseService {
     try {
       const record = await this.repository.getOneById(id);
       if (!record) {
-        return responseNotFoundError('Record not found.')
+        return responseNotFoundError("Record not found.");
       }
       const result = await this.repository.updateByModel(record, data);
       this.kafkaProducer.updated({ data: result, old: record });
       return responseOK(result);
     } catch (err) {
-      return Promise.reject(err)
+      return Promise.reject(err);
     }
   }
 
@@ -51,7 +54,7 @@ class BaseService {
     try {
       const record = await this.repository.getOneById(id);
       if (!record) {
-        return responseNotFoundError('Record not found.');
+        return responseNotFoundError("Record not found.");
       }
 
       const result = await this.repository.deleteById(id);

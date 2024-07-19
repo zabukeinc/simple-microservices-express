@@ -1,4 +1,4 @@
-const { responseInternalServerError } = require('@helper/base.response.helper');
+const { responseInternalServerError } = require("@helper/base.response.helper");
 
 class BaseRepository {
   constructor(model) {

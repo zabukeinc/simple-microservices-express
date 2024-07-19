@@ -1,5 +1,5 @@
-require('dotenv').config();
-const { Kafka } = require('kafkajs');
+require("dotenv").config();
+const { Kafka } = require("kafkajs");
 
 // Kafka configuration
 const kafka = new Kafka({
@@ -11,9 +11,9 @@ const producer = kafka.producer();
 const disconnectProducer = async () => {
   try {
     await producer.disconnect();
-    console.log('Kafka Producer disconnected');
+    console.log("Kafka Producer disconnected");
   } catch (err) {
-    console.error('Failed to disconnect Kafka Producer:', err);
+    console.error("Failed to disconnect Kafka Producer:", err);
   }
 };
 class KafkaProducer {
@@ -31,15 +31,15 @@ class KafkaProducer {
     try {
       await producer.connect();
       this._connected = true;
-      console.log('Kafka Producer connected');
+      console.log("Kafka Producer connected");
     } catch (error) {
-      console.error('Failed to connect Kafka Producer:', error);
+      console.error("Failed to connect Kafka Producer:", error);
     }
   }
 
   async sendMessage(topic, messages) {
     if (!this._connected) {
-      console.error('Kafka Producer is not connected');
+      console.error("Kafka Producer is not connected");
       return;
     }
 
@@ -48,9 +48,9 @@ class KafkaProducer {
         topic,
         messages: [{ value: messages }],
       });
-      console.log('Message sent successfully');
+      console.log("Message sent successfully");
     } catch (error) {
-      console.error('Failed to send message:', error);
+      console.error("Failed to send message:", error);
     }
   }
 
@@ -59,18 +59,18 @@ class KafkaProducer {
       try {
         await producer.disconnect();
         this._connected = false;
-        console.log('Kafka Producer disconnected');
+        console.log("Kafka Producer disconnected");
       } catch (error) {
-        console.error('Failed to disconnect Kafka Producer:', error);
+        console.error("Failed to disconnect Kafka Producer:", error);
       }
     }
   }
 }
 
-process.on('SIGINT', async () => {
+process.on("SIGINT", async () => {
   disconnectProducer();
 });
-process.on('SIGTERM', async () => {
+process.on("SIGTERM", async () => {
   disconnectProducer();
 });
 

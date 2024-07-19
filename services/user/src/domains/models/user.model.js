@@ -1,5 +1,5 @@
-const { DataTypes } = require("sequelize")
-const sequelizeInstance = require('@database/database')
+const { DataTypes } = require("sequelize");
+const sequelizeInstance = require("@database/database");
 
 const UserModel = sequelizeInstance.define(
   "users",
@@ -33,4 +33,4 @@ const UserModel = sequelizeInstance.define(
   { timestamps: true, paranoid: true },
 );
 
-module.exports = UserModel
+module.exports = UserModel;

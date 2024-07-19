@@ -3,7 +3,7 @@ const { UserTopic } = require("@user-module/domains/topics/user.topic");
 
 class UserConsumer extends BaseConsumer {
   constructor() {
-    super({ groupId: 'user-service-consumer' });
+    super({ groupId: "user-service-consumer" });
     this.invoke();
   }
 
@@ -22,14 +22,13 @@ class UserConsumer extends BaseConsumer {
             await this.onDelete(topic, message);
             break;
           default:
-            console.error('No Topic Found');
+            console.error("No Topic Found");
         }
       } catch (err) {
-        console.error(`An error on consumer ${topic}`)
+        console.error(`An error on consumer ${topic}`);
         console.error(err);
       }
-
-    }
+    };
 
     super.run(userTopics, eachMessageCallback);
   }

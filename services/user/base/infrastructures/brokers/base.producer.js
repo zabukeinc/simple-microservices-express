@@ -8,34 +8,36 @@ class BaseProducer {
   }
 
   /**
-   * @param {Object} message 
+   * @param {Object} message
    */
   async created(data) {
     await producer.connect();
     await producer.sendMessage(this.createdTopic, JSON.stringify(data));
-    console.log(`Triggered ${this.createdTopic}`)
+    console.log(`Triggered ${this.createdTopic}`);
   }
 
   /**
-   * 
-   * @param {Object} param0 
-   * @param {Object} param1 
+   *
+   * @param {Object} param0
+   * @param {Object} param1
    */
   async updated({ data, old }) {
     await producer.connect();
-    await producer.sendMessage(this.updatedTopic, JSON.stringify({ data, old }));
-    console.log(`Triggered ${this.updatedTopic}`)
+    await producer.sendMessage(
+      this.updatedTopic,
+      JSON.stringify({ data, old }),
+    );
+    console.log(`Triggered ${this.updatedTopic}`);
   }
 
   /**
-   * @param {Object} message 
+   * @param {Object} message
    */
   async deleted(data) {
     await producer.connect();
     await producer.sendMessage(this.deletedTopic, JSON.stringify(data));
-    console.log(`Triggered ${this.deletedTopic}`)
+    console.log(`Triggered ${this.deletedTopic}`);
   }
-
 }
 
 module.exports = BaseProducer;

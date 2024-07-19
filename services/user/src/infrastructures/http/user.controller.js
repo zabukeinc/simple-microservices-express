@@ -1,9 +1,9 @@
-const BaseController = require('@base/infrastructures/http/base.controller');
-const UserService = require('@user-module/applications/services/user.service');
+const BaseController = require("@base/infrastructures/http/base.controller");
+const UserService = require("@user-module/applications/services/user.service");
 
 class UserController extends BaseController {
   constructor() {
-    super(new UserService())
+    super(new UserService());
     this.index = this.index.bind(this);
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
@@ -12,4 +12,4 @@ class UserController extends BaseController {
   }
 }
 
-module.exports = UserController 
+module.exports = UserController;

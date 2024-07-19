@@ -1,10 +1,10 @@
-const BaseService = require('@base/applications/services/base.service');
-const UserRepository = require('@user-module/applications/repositories/user.repository');
-const UserProducer = require('@user-module/infrastructures/brokers/user.producer');
+const BaseService = require("@base/applications/services/base.service");
+const UserRepository = require("@user-module/applications/repositories/user.repository");
+const UserProducer = require("@user-module/infrastructures/brokers/user.producer");
 
 class UserService extends BaseService {
   constructor() {
-    super(new UserRepository(), new UserProducer())
+    super(new UserRepository(), new UserProducer());
     this.index = this.index.bind(this);
     this.getOneById = this.getOneById.bind(this);
     this.create = this.create.bind(this);
@@ -13,4 +13,4 @@ class UserService extends BaseService {
   }
 }
 
-module.exports = UserService 
+module.exports = UserService;
