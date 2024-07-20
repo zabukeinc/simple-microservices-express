@@ -1,12 +1,39 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const port = process.env.APP_PORT
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
-app.get('/', (req, res) => {
-  res.send('Hello World! Gateway')
-})
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Gateway app listening on port ${port}`)
-})
+// Proxy configurations
+const userServiceProxy = createProxyMiddleware({
+  target: "http://localhost:3006/users",
+  changeOrigin: true,
+  pathRewrite: {
+    "^/users": "",
+  },
+});
+
+const materialServiceProxy = createProxyMiddleware({
+  target: "http://localhost:3007/materials",
+  changeOrigin: true,
+  pathRewrite: {
+    "^/materials": "",
+  },
+});
+
+const transactionServiceProxy = createProxyMiddleware({
+  target: "http://localhost:3008/transactions",
+  changeOrigin: true,
+  pathRewrite: {
+    "^/transactions": "",
+  },
+});
+
+// Routes
+app.use("/api/users", userServiceProxy);
+app.use("/api/materials", materialServiceProxy);
+app.use("/api/transactions", transactionServiceProxy);
+
+app.listen(PORT, () => {
+  console.log(`Gateway service is running on port ${PORT}`);
+});
