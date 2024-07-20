@@ -6,7 +6,6 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const materialRoute = require("@material-module/infrastructures/routes/material.route");
-const MaterialConsumer = require("@material-module/infrastructures/brokers/material.consumer");
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -16,8 +15,6 @@ sequelize
   .then(() => console.log("Database connected."))
   .catch((err) => console.error("Unable to connect to the database:", err));
 
-// Consumer
-new MaterialConsumer().run();
 
 // Routes
 app.get("/", (req, res) => {

@@ -1,9 +1,11 @@
 const BaseConsumer = require("@base/infrastructures/brokers/base.consumer");
-const { UserTopic } = require("@user-module/domains/topics/user.topic");
+const UserService = require("@transaction-module/applications/services/user.service");
+const { UserTopic } = require("@transaction-module/domains/topics/user.topic");
 
 class UserConsumer extends BaseConsumer {
   constructor() {
-    super({ groupId: "user-service-consumer" });
+    super({ groupId: "User-service-consumer" });
+    this.userService = new UserService();
     this.invoke();
   }
 
@@ -35,17 +37,26 @@ class UserConsumer extends BaseConsumer {
 
   async onCreated(topic, message) {
     const decoded = JSON.parse(message.value);
-    console.log(`Consuming ${topic} on User Service => Data ${message.value}`);
+    await this.userService.create(decoded);
+    console.log(
+      `Consuming ${topic} on Transaction Service => Data ${message.value}`,
+    );
   }
 
   async onUpdate(topic, message) {
     const { data, old } = JSON.parse(message.value);
-    console.log(`Consuming ${topic} on User Service => Data ${message.value}`);
+    await this.userService.updateById(old.id, data);
+    console.log(
+      `Consuming ${topic} on Transaction Service => Data ${message.value}`,
+    );
   }
 
   async onDelete(topic, message) {
     const decoded = JSON.parse(message.value);
-    console.log(`Consuming ${topic} on User Service => Data ${message.value}`);
+    await this.userService.deleteById(decoded.id);
+    console.log(
+      `Consuming ${topic} on Transaction Service => Data ${message.value}`,
+    );
   }
 }
 

@@ -5,7 +5,6 @@ const sequelize = require("@database/database");
 const app = express();
 const bodyParser = require("body-parser");
 const userRoute = require("@user-module/infrastructures/routes/user.route");
-const UserConsumer = require("@user-module/infrastructures/brokers/user.consumer");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -16,8 +15,6 @@ sequelize
   .then(() => console.log("Database connected."))
   .catch((err) => console.error("Unable to connect to the database:", err));
 
-// Consumer
-new UserConsumer().run();
 
 // Routes
 app.get("/", (req, res) => {
