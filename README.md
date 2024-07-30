@@ -9,7 +9,7 @@
 
 ## Setup Project & Installements
 ```
-cd badr-be-assessment
+cd project
 npm install
 
 cd services/user
@@ -64,7 +64,7 @@ You have to enter each services to do a migration syntax, when you have already 
 ## Run the app
 You can run the apps concurently using:
 
-On folder be-badr-assessment, execute following command(s)
+On folder project, execute following command(s)
 
 ### Hot Reload / Dev Mode
 ```
