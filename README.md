@@ -1,6 +1,4 @@
 # Simple Express Microservices with Kafka, TypeORM & MySQL.
-This repository is to fulfill the technical as a Backend Engineer on BADR-Interactive.
-
 
 ### References
 [Draw.io - System Design & Structure Folder Concepts](https://drive.google.com/file/d/1vTmn0iC6LX1YXymLDytRG8s5TbxXVjaM/view?usp=sharing)
