@@ -1,12 +1,35 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const port = process.env.APP_PORT
+require("dotenv").config();
+require("module-alias/register");
+const express = require("express");
+const sequelize = require("@database/database");
+const app = express();
+const bodyParser = require("body-parser");
+const userRoute = require("@user-module/infrastructures/routes/user.route");
 
-app.get('/', (req, res) => {
-  res.send('Hello World! User')
-})
+app.use(express.json());
+app.use(bodyParser.json());
 
-app.listen(port, () => {
-  console.log(`User app listening on port ${port}`)
-})
+// Database
+sequelize
+  .authenticate()
+  .then(() => console.log("Database connected."))
+  .catch((err) => console.error("Unable to connect to the database:", err));
+
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("Hello World User!");
+});
+
+app.use("/users", userRoute);
+
+const PORT = process.env.APP_PORT || 3000;
+const server = app.listen(PORT, () =>
+  console.log(`User Server running on port ${PORT}`),
+);
+
+process.on("SIGINT", () => {
+  server.close();
+  process.exit(0);
+});
+module.exports = app;
